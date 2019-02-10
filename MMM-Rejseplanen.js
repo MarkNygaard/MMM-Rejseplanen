@@ -21,7 +21,7 @@ Module.register("MMM-Rejseplanen",{
     appendLocationNameToHeader: true,
     initialLoadDelay: 0, // 0 seconds delay
     retryDelay: 2500,
-    apiBase: "http://xmlopen.rejseplanen.dk/bin/rest.exe/departureBoard",
+    apiBase: "http://xmlopen.rejseplanen.dk/bin/rest.exe/multiDepartureBoard",
     stationID: "",
     stationName: "",
     departuresMax: 20,
@@ -174,8 +174,8 @@ Module.register("MMM-Rejseplanen",{
 
   processDepartures: function(data) {
     this.departures = [];
-    for (var i in data.DepartureBoard.Departure) {
-      var t = data.DepartureBoard.Departure[i];
+    for (var i in data.MultiDepartureBoard.Departure) {
+      var t = data.MultiDepartureBoard.Departure[i];
       if (t.finalStop.includes(this.config.destfilter) || t.direction.includes(this.config.destfilter)) {
         this.departures.push({
           time: t.time,
